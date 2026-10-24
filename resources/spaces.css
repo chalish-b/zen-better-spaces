@@ -1,0 +1,140 @@
+/* Zen's own space switcher; the Spaces button replaces it. */
+#zen-workspaces-button {
+  display: none !important;
+}
+
+#zen-mod-spaces-button {
+  list-style-image: url("chrome://browser/skin/zen-icons/selectable/grid-2x2.svg");
+}
+
+#zen-mod-spaces {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, black 35%, transparent);
+  backdrop-filter: blur(12px);
+  font: menu;
+  animation: zen-mod-spaces-in 0.15s ease-out;
+}
+
+@keyframes zen-mod-spaces-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.zen-mod-spaces-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 180px);
+  justify-content: center;
+  gap: 20px;
+  width: min(1100px, 90vw);
+  max-height: 80vh;
+  padding: 24px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  animation: zen-mod-spaces-grid-in 0.2s ease-out;
+}
+
+@keyframes zen-mod-spaces-grid-in {
+  from {
+    scale: 0.97;
+  }
+}
+
+.zen-mod-space {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 140px;
+  padding: 12px;
+  border: none;
+  border-radius: 14px;
+  background: var(--zen-branding-bg);
+  color: black;
+  font: inherit;
+  cursor: pointer;
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+  transition:
+    scale 0.15s ease,
+    outline-color 0.15s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--zen-mod-space-gradient);
+    background-blend-mode: screen;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  &[dark] {
+    color: white;
+  }
+
+  &:hover {
+    scale: 1.03;
+  }
+
+  &:focus-visible {
+    outline-color: white;
+  }
+
+  &[active] {
+    outline-color: var(--zen-primary-color);
+  }
+}
+
+.zen-mod-space-new {
+  background: color-mix(in srgb, white 10%, transparent);
+  color: white;
+  outline: 1px dashed color-mix(in srgb, white 40%, transparent);
+  outline-offset: -1px;
+
+  &::before {
+    display: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+  }
+}
+
+.zen-mod-space-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-size: 30px;
+
+  & img {
+    width: 28px;
+    height: 28px;
+    -moz-context-properties: fill;
+    fill: currentColor;
+  }
+}
+
+.zen-mod-space-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.zen-mod-space-count {
+  font-size: 11px;
+  opacity: 0.7;
+}
