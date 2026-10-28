@@ -1,6 +1,6 @@
 # Zen Better Spaces
 
-A mod for [Zen Browser](https://zen-browser.app) that replaces the space switcher at the bottom of the sidebar with a full-window spaces view.
+Replaces the space switcher at the bottom of [Zen Browser](https://zen-browser.app)'s sidebar with a full-window spaces view.
 
 ![The spaces view, showing each space as a tile](assets/spaces.webp)
 

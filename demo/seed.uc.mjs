@@ -3,7 +3,7 @@
 // @description    Fills the demo profile with sample spaces. Only loaded by demo-profile.sh.
 // ==/UserScript==
 
-const SEEDED_PREF = "zenmod.demo.seeded";
+const SEEDED_PREF = "zenBetterSpaces.demo.seeded";
 
 // Each color is [rgb, picker position], as Zen's theme picker saves them.
 // Spaces without a theme use Zen's default background.
@@ -97,5 +97,5 @@ async function seed() {
 
 if (!Services.prefs.getBoolPref(SEEDED_PREF, false)) {
   Services.prefs.setBoolPref(SEEDED_PREF, true);
-  seed().catch((error) => console.error("[zen-mod] demo seed failed", error));
+  seed().catch((error) => console.error("[zen-better-spaces] demo seed failed", error));
 }

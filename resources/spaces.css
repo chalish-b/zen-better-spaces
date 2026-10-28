@@ -3,11 +3,11 @@
   display: none !important;
 }
 
-#zen-mod-spaces-button {
+#zen-better-spaces-button {
   list-style-image: url("chrome://browser/skin/zen-icons/selectable/grid-2x2.svg");
 }
 
-#zen-mod-spaces {
+#zen-better-spaces {
   position: fixed;
   inset: 0;
   z-index: 10000;
@@ -17,16 +17,16 @@
   background: color-mix(in srgb, black 35%, transparent);
   backdrop-filter: blur(12px);
   font: menu;
-  animation: zen-mod-spaces-in 0.15s ease-out;
+  animation: zen-better-spaces-in 0.15s ease-out;
 }
 
-@keyframes zen-mod-spaces-in {
+@keyframes zen-better-spaces-in {
   from {
     opacity: 0;
   }
 }
 
-.zen-mod-spaces-grid {
+.zen-better-spaces-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 180px);
   justify-content: center;
@@ -36,16 +36,16 @@
   padding: 24px;
   overflow-y: auto;
   scrollbar-width: none;
-  animation: zen-mod-spaces-grid-in 0.2s ease-out;
+  animation: zen-better-spaces-grid-in 0.2s ease-out;
 }
 
-@keyframes zen-mod-spaces-grid-in {
+@keyframes zen-better-spaces-grid-in {
   from {
     scale: 0.97;
   }
 }
 
-.zen-mod-space {
+.zen-better-spaces-space {
   position: relative;
   isolation: isolate;
   display: flex;
@@ -73,7 +73,7 @@
     inset: 0;
     z-index: -1;
     border-radius: inherit;
-    background: var(--zen-mod-space-gradient);
+    background: var(--zen-better-spaces-space-gradient);
     background-blend-mode: screen;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   }
@@ -95,7 +95,7 @@
   }
 }
 
-.zen-mod-space-new {
+.zen-better-spaces-space-new {
   background: color-mix(in srgb, white 10%, transparent);
   color: white;
   outline: 1px dashed color-mix(in srgb, white 40%, transparent);
@@ -111,7 +111,7 @@
   }
 }
 
-.zen-mod-space-icon {
+.zen-better-spaces-space-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,7 +126,7 @@
   }
 }
 
-.zen-mod-space-name {
+.zen-better-spaces-space-name {
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -134,7 +134,7 @@
   font-weight: 600;
 }
 
-.zen-mod-space-count {
+.zen-better-spaces-space-count {
   font-size: 11px;
   opacity: 0.7;
 }

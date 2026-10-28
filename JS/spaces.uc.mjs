@@ -5,8 +5,8 @@
 
 const HTML = "http://www.w3.org/1999/xhtml";
 const STYLESHEET = "chrome://userchrome/content/spaces.css";
-const BUTTON_ID = "zen-mod-spaces-button";
-const BUTTON_PLACED_PREF = "zenmod.spaces.buttonPlaced";
+const BUTTON_ID = "zen-better-spaces-button";
+const BUTTON_PLACED_PREF = "zenBetterSpaces.buttonPlaced";
 const SHORTCUT = { modifiers: "accel", key: "E" };
 
 function el(tag, className) {
@@ -16,7 +16,7 @@ function el(tag, className) {
 }
 
 function spaceIcon(space) {
-  const icon = el("div", "zen-mod-space-icon");
+  const icon = el("div", "zen-better-spaces-space-icon");
   const value = gZenWorkspaces.getWorkspaceIcon(space);
   if (value?.endsWith(".svg")) {
     const image = el("img");
@@ -52,13 +52,13 @@ class SpacesView {
     this.#previousFocus = document.commandDispatcher.focusedElement;
 
     const root = el("div");
-    root.id = "zen-mod-spaces";
+    root.id = "zen-better-spaces";
     root.addEventListener("click", (event) => {
       if (event.target === root) this.close();
     });
     root.addEventListener("keydown", (event) => this.#onKeyDown(event));
 
-    const grid = el("div", "zen-mod-spaces-grid");
+    const grid = el("div", "zen-better-spaces-grid");
     for (const space of gZenWorkspaces.getWorkspaces()) {
       grid.append(this.#spaceTile(space));
     }
@@ -79,15 +79,15 @@ class SpacesView {
   }
 
   #spaceTile(space) {
-    const tile = el("button", "zen-mod-space");
+    const tile = el("button", "zen-better-spaces-space");
     const { gradient, isDarkMode } = gZenThemePicker.getGradientForWorkspace(space);
-    tile.style.setProperty("--zen-mod-space-gradient", gradient);
+    tile.style.setProperty("--zen-better-spaces-space-gradient", gradient);
     tile.toggleAttribute("dark", isDarkMode);
     tile.toggleAttribute("active", space.uuid === gZenWorkspaces.activeWorkspace);
 
-    const name = el("div", "zen-mod-space-name");
+    const name = el("div", "zen-better-spaces-space-name");
     name.textContent = space.name;
-    const count = el("div", "zen-mod-space-count");
+    const count = el("div", "zen-better-spaces-space-count");
     const tabs = tabCount(space);
     count.textContent = tabs === 1 ? "1 tab" : `${tabs} tabs`;
     tile.append(spaceIcon(space), name, count);
@@ -100,10 +100,10 @@ class SpacesView {
   }
 
   #newSpaceTile() {
-    const tile = el("button", "zen-mod-space zen-mod-space-new");
-    const icon = el("div", "zen-mod-space-icon");
+    const tile = el("button", "zen-better-spaces-space zen-better-spaces-space-new");
+    const icon = el("div", "zen-better-spaces-space-icon");
     icon.textContent = "+";
-    const name = el("div", "zen-mod-space-name");
+    const name = el("div", "zen-better-spaces-space-name");
     name.textContent = "New Space";
     tile.append(icon, name);
     tile.addEventListener("click", () => {
@@ -119,7 +119,7 @@ class SpacesView {
       this.close();
       return;
     }
-    const tiles = [...this.#root.querySelectorAll(".zen-mod-space")];
+    const tiles = [...this.#root.querySelectorAll(".zen-better-spaces-space")];
     const index = tiles.indexOf(document.activeElement);
     if (index === -1) return;
     const columns = tiles.filter((tile) => tile.offsetTop === tiles[0].offsetTop).length;
@@ -181,9 +181,9 @@ async function init() {
   document.addEventListener("command", (event) => {
     if (event.target.id === BUTTON_ID) view.toggle();
   });
-  await UC_API.Hotkeys.define({ id: "zenModSpaces", ...SHORTCUT, command: () => view.toggle() }).attachToWindow(window);
+  await UC_API.Hotkeys.define({ id: "zenBetterSpaces", ...SHORTCUT, command: () => view.toggle() }).attachToWindow(window);
   disableConflictingKeys();
   window.addEventListener("ZenKeyboardShortcutsReady", disableConflictingKeys);
 }
 
-init().catch((error) => console.error("[zen-mod] spaces failed to start", error));
+init().catch((error) => console.error("[zen-better-spaces] failed to start", error));
